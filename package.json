@@ -1,9 +1,14 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "config": "^3.3.8",
+    "debug": "^4.3.4",
     "dotenv": "^16.0.3",
     "i": "^0.3.7",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.13.0",
+    "mongoose": "^6.8.3",
     "npm": "^9.2.0"
   }
 }
