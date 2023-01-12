@@ -11,8 +11,7 @@ if user.isEvil =true {
 
 
 async function main(){
- 
-    const uri = "mongodb+srv://andjiao:leverpostej@cluster0.rujjilh.mongodb.net/GoodAndEvil";
+    const url = `mongodb+srv://andjiao:${process.env.MONGODB_ATLAS_PASSWORD}@cluster0.rujjilh.mongodb.net/GoodAndEvil`;
     const client = new MongoClient(uri, {
         useNewUrlParser: true, 
         useUnifiedTopology: true,
