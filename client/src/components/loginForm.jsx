@@ -1,6 +1,8 @@
 import React from "react";
 import Form from "./reUseable/form";
 import Joi from 'joi-browser'
+import * as auth from '../services/authService.js'
+import { Navigate } from "react-router-dom";
 
 class loginForm extends Form{
   state = {  
@@ -15,7 +17,29 @@ class loginForm extends Form{
       .label("Password")
   };
 
+  doSubmit =async () =>{
+    try {
+      const {data} = this.state;
+      await auth.login(data.email, data.password);
+      const {state} = this.props.location;
+      window.location = state? state.from.pathname : '/'; 
+      
+    } catch (ex) {
+      if(ex.response && ex.response.status ===400){
+        const errors ={...this.state.errors}
+        errors.email = ex.response.data;
+        this.setState({errors})
+
+      }
+     
+      
+    }
+    
+
+  }
+
   render() { 
+    if(auth.getCurrentUser()) return <Navigate to="/"/>
     return (
       <div>
         <h1>Login</h1>

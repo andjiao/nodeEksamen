@@ -1,12 +1,14 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 import bodyParser from "body-parser"
 
 import express from "express";
 const app = express();
 
+import { authRouter } from "./routes/auth.js";
 import { userRouter } from './routes/user.js';
 import {evilStudentRouter} from './routes/evilStudent.js'
 import { goodStudentRouter } from './routes/goodStudent.js';
+import { mentorRouter } from './routes/mentor.js';
 
 
 app.use(express.static("public"))
@@ -20,9 +22,11 @@ mongoose.connect(url)
 .then(() => console.log('Connected to MongoDB...'))
 .catch(err => console.error('Could not connect to MongoDB...'))
 
+app.use('/api/login', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/goodStudents', goodStudentRouter);
 app.use('/api/evilStudents', evilStudentRouter);
+app.use('/api/mentors', mentorRouter);
 
 
 const PORT = process.env.PORT || 8080;

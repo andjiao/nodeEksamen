@@ -6,7 +6,7 @@ const router = express.Router();
 
 import { User} from "../models/user.js";
 
-router.post('/', async (req, res) => {
+router.post('/login', async (req, res) => {
     const { error } = validate(req.body); 
     if (error) return res.status(400).send(error.details[0].message);
   
@@ -30,4 +30,4 @@ router.post('/', async (req, res) => {
     return schema.validate(req, schema);
   }
   
-  module.exports = router; 
+  export {router as authRouter};

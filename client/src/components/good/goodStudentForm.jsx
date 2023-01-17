@@ -1,8 +1,9 @@
 import React from "react";
 import Joi from "joi-browser";
-import Form from './reUseable/form'
+import Form from '../reUseable/form'
+import {/*getGoodStudents*/ getGoodStudent, saveGoodStudent, /*deleteGoodStudent*/} from '../../services/goodStudentService.js';
 
-class goodStudentForm extends Form {
+class GoodStudentForm extends Form {
     state = {
         data:{
             name:'',
@@ -20,18 +21,25 @@ class goodStudentForm extends Form {
         isEvil: Joi.boolean()
       };
 
+      async populateGoodStudent() {
+        try {
+          const goodStudentId = this.props.match.params.id;
+          if (goodStudentId === "new") return;
     
-      componentDidMount(){
-          const goodStudentId = this.props.match.id;
-          if(goodStudentId ==='new') return;
-
-          const goodStudent = getGoodStudent(goodStudentId);
-          if(!goodStudent) return this.props.history.replace("/not-found")
-
-          this.setState({data: this.mapToViewGoodStudent});
+          const { data: goodStudent } = await getGoodStudent(goodStudentId);
+          this.setState({ data: this.mapToViewModel(goodStudent) });
+        } catch (ex) {
+          if (ex.response && ex.response.status === 404)
+            this.props.history.replace("/not-found");
+        }
       }
 
-      mapToViewGoodStudent(goodStudent){
+
+      async componentDidMount(){
+          await this.populateGoodStudent();
+      }
+
+      mapToViewModel(goodStudent){
           return{
               _id: goodStudent._id,
               name:goodStudent.name,
@@ -41,10 +49,12 @@ class goodStudentForm extends Form {
           }
       }
 
-      doSubmit =()=>{
-          saveGoodStudent(this.state.data);
-          this.props.history.push("/goodStudents")
-      }
+  doSubmit = async () => {
+    await saveGoodStudent(this.state.data);
+
+    this.props.history.push("/goodStudent");
+  };
+
     render() { 
         return (
             <div>
@@ -53,15 +63,13 @@ class goodStudentForm extends Form {
                 {this.renderInput('name','Name')}
                 {this.renderInput('abilities','Abilities')}
                 {this.renderInput('whoToHelpt','Who do you want to help?')}
-                {this.renderInput('isEvil',' you are one of the good ones')}
+                <h3>you are one of the good ones</h3>
                 {this.renderButton("Save")}
             </form>
-
             </div>
            
         );
     }
 }
  
-export default goodStudentForm;
-
+export default GoodStudentForm;
