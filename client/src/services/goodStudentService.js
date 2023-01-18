@@ -7,7 +7,7 @@ import axios from "axios";
 
 class GoodStudentService extends Component {
   
-  let GoodStudentsService() {
+  function GoodStudentsService= ()=> {
     const [goodStudents,setGoodStudents] = useState([])
   
     useEffect(()=>{
