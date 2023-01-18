@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bodyParser from "body-parser"
+import "dotenv/config"; 
 
 import express from "express";
 const app = express();
@@ -22,6 +23,7 @@ mongoose.connect(url)
 .then(() => console.log('Connected to MongoDB...'))
 .catch(err => console.error('Could not connect to MongoDB...'))
 
+
 app.use('/api/login', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/goodStudents', goodStudentRouter);
@@ -31,10 +33,9 @@ app.use('/api/mentors', mentorRouter);
 
 const PORT = process.env.PORT || 8080;
 
-const server =app.listen(PORT,(error)=>
-{
-if(error){
-    console.log(error);
-}
-console.log("Server is running on port", server.address().port)
-});
+const server = app.listen(PORT,(error)=>{
+    if(error){
+        console.log(error)
+    }
+    console.log("Server is running on port", server.address().port)
+})
