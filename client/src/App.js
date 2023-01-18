@@ -37,9 +37,11 @@ class App extends Component {
           <Route path="/logout" element ={<Logout/>}/>
           <Route path="/goodStudents" 
           render ={props => <goodStudents {...props} user={this.state.user}/>}/>
-          <ProtectedRoute 
+          <Route element={<ProtectedRoute
           path="/goodStudents/:id"
-          component={GoodStudentForm}/>
+          element={GoodStudentForm}/>}>
+          </Route>
+
           <Route path="/evilStudents/:id" element={<EvilStudentForm />}/>
           <Route path="/not-found" element={<NotFound/>}/>
         </Routes>
