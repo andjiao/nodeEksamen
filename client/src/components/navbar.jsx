@@ -23,8 +23,21 @@ const NavBar = ({user}) => {
           <NavLink className="nav-item nav-link" to="/">
             About
           </NavLink>
+          <NavLink className="nav-item nav-link" to="/login">
+            Login
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/register">
+            Sigin
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/goodStudents">
+            Good Students
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/evilstudents">
+            Evil Students
+          </NavLink>
 
-          {!user && (
+
+          {/* {!user && (
             <>
             <NavLink className="nav-item nav-link" to="/Login">
             Login
@@ -34,6 +47,7 @@ const NavBar = ({user}) => {
           </NavLink>
           </>
           )}
+
           {user && (
             <>
             <NavLink className="nav-item nav-link" to="/me">
@@ -47,14 +61,10 @@ const NavBar = ({user}) => {
           </NavLink>
           <NavLink className="nav-item nav-link" to="/evilStudents">
             Evil Students
-          </NavLink>
+          </NavLink> 
 
           </>
-          )}
-
-
-
-          
+          )}*/}   
           
         </div>
       </div>

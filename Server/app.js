@@ -11,6 +11,8 @@ import {evilStudentRouter} from './routes/evilStudent.js'
 import { goodStudentRouter } from './routes/goodStudent.js';
 import { mentorRouter } from './routes/mentor.js';
 
+import cors from "cors";
+app.use(cors({ credentials: true, origin: true }));
 
 app.use(express.static("public"))
 app.use(bodyParser.json())
