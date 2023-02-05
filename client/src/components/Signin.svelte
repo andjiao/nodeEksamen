@@ -15,6 +15,7 @@
     let nameInput =""
     let emailInput =""
     let passwordInput=""
+    let isEvilInput= false
 
     
         async function signin(){
@@ -31,7 +32,8 @@
             const body = {
                 name: nameInput,
                 email: emailInput,
-                password: passwordInput
+                password: passwordInput,
+                isEvil: isEvilInput
 
             }
             try {
@@ -79,7 +81,11 @@
             id="signPasswordInput" 
             name="password" 
             required>
-            <br>
+            
+            <label>
+                
+                <input type="checkbox" bind:checked={isEvilInput}>
+            </label>
         </form>
         <button class="btn btn-primary" type="submit" id="subtmit" on:click={signin}>Signin</button>
     </div>

@@ -14,7 +14,7 @@
  
        let nameInput =""
        let emailInput =""
-       let isAdminInput =""
+       let isEvilInput =""
       
        
        
@@ -47,7 +47,7 @@ async function updateUser(){
  const body = {
            name: nameInput,
            email: emailInput,
-           isAdmin: isAdminInput,
+           isEvil: isEvilInput,
            
        }
        try {
@@ -95,10 +95,10 @@ getUser()
          <input type="text" name="email" id="email" bind:value={emailInput} placeholder={user.email}>
      </div>
      <br>
-     <div class="isAdmin">
-         <label for="isAdmin">Admin?</label>
+     <div class="isEvil">
+         <label for="isEvil">Evil?</label>
          <br>
-         <input type="text" name="isADmin" id="isAdmin" bind:value={isAdminInput} placeholder={user.isAdmin}>
+         <input type="text" name="isEvil" id="isEvil" bind:value={isEvilInput} placeholder={user.isEvil}>
      </div>
      <br>
  </form>

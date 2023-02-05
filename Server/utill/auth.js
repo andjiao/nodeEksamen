@@ -1,6 +1,6 @@
 export function checkingIsEvil(req, res, next) {
-    if (req.session.isAdmin !== true) {
-        return res.status(401).send({ message: "Not admin." })
+    if (req.session.isEvil !== true) {
+        return res.status(401).send({ message: "not evil enought!" })
     }
     next()
 }

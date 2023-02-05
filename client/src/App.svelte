@@ -4,6 +4,10 @@
   import GoodStudents from "./components/GoodStudents.svelte";
   import GoodForm from "./components/GoodForm.svelte";
   import GoodUpdate from "./components/GoodUpdate.svelte";
+  
+  import EvilStudents from "./components/EvilStudents.svelte";
+  //import EvilForm from "./components/EvilForm.svelte";
+  //import EvilUpdate from "./components/EvilUpdate.svelte";
 
   import Users from "./components/Users.svelte";
  
@@ -23,6 +27,10 @@
         <Route primary={false} path="/goodStudents"> <GoodStudents /> </Route>
         <Route path="/goodForm"> <GoodForm/> </Route>
         <Route primary={false} path="/goodUpdate/:id"> <GoodUpdate/> </Route>
+
+        <Route primary={false} path="/evilStudents"> <EvilStudents /> </Route>
+    <!--     <Route path="/evilForm"> <EvilForm/> </Route>
+        <Route primary={false} path="/EvilUpdate/:id"> <EvilUpdate/> </Route> -->
 
 
         <Route primary={false} path="/users"> <Users/> </Route>

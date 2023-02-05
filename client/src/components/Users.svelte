@@ -10,7 +10,7 @@
 import { useNavigate } from 'svelte-navigator';
 const navigate = useNavigate()
 
-if($user?.isAdmin !== true) {
+if($user?.isEvil !== true) {
         const navigate = useNavigate()
 
         navigate('/home')

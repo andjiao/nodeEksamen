@@ -66,7 +66,7 @@
         Login
       </Link>
      
-      {:else if $user.isAdmin === false}
+      {:else if $user.isEvil === false}
       
       <Link class="nav-item nav-link" to="/goodStudents">
         Good Students
@@ -75,12 +75,9 @@
         <button class="btn btn-sm btn-outline-secondary" on:click={logout} >Logout</button>
       </form>
       
-      {:else if $user.isAdmin === true}
-      <Link class="nav-item nav-link" to="/users">
-        View all users
-      </Link> 
-      <Link class="nav-item nav-link" to="/goodStudents">
-        Good Students
+      {:else if $user.isEvil === true}
+      <Link class="nav-item nav-link" to="/evilStudents">
+        Evil Students
       </Link> 
       <form class="form-inline">
         <button class="btn btn-sm btn-outline-secondary" on:click={logout} >Logout</button>

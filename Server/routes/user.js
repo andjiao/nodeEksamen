@@ -17,7 +17,7 @@ router.post('/signin', async (req, res) => {
   let newUser = await User.findOne({ email: req.body.email });
   if (newUser) return res.status(400).send('User already registered.');
   
-  newUser = new User(_.pick(req.body, ['name','email','password']));
+  newUser = new User(_.pick(req.body, ['name','email','password','isEvil']));
   newUser.password = await hashingPassword(req.body.password);
   
   await newUser.save();
@@ -38,10 +38,10 @@ router.post('/login', async (req, res) => {
       req.session.userid = user._id
       
       if (user.admin === true) {
-        res.status(200).send({ data: {id: user.id, email: user.email, isAdmin: !!user.isAdmin } })
+        res.status(200).send({ data: {id: user.id, email: user.email, isEvil: !!user.isEvil } })
         return
             }
-          res.status(200).send({ data: {id: user.id, email: user.email, isAdmin: !!user.isAdmin}})
+          res.status(200).send({ data: {id: user.id, email: user.email, isEvil: !!user.isEvil}})
         }
     } catch (error) {
       console.log(error)
@@ -82,7 +82,7 @@ router.put('/:id', async (req, res) => {
   const user = await user.findByIdAndUpdate(req.params.id,{
     name: req.body.name,
     email: req.body.email,
-    isAdmin: req.body.isAdmin,
+    isEvil: req.body.isEvil,
   });
 
   if (!user) return res.status(404).send('The user with the given ID was not found.');

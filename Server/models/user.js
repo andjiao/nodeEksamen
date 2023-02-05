@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
-  isAdmin:{
+  isEvil:{
     type: Boolean,
     default:false,
     required: false,
@@ -37,7 +37,7 @@ function validateUser(userSchema) {
     name:Joi.string().min(2).max(255),
     email:Joi.string().min(5).max(255).required().email(),
     password:Joi.string().min(5).max(255).required(),
-    isAdmin:Joi.boolean(),
+    isEvil:Joi.boolean(),
   });
 
   return schema.validate(userSchema);

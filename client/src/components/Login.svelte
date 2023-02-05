@@ -18,7 +18,7 @@
             name:"",
             email: emailInput,
             password: passwordInput,
-            isAdmin:"",
+            isEvil:"",
             id:""
         }
 
