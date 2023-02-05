@@ -1,0 +1,49 @@
+
+[
+    {
+        "name":"Fairy",
+        "descrption":"Metaphysical form of spirit",
+        "origins": "European Folklore",
+        "image": "https://ik.imagekit.io/andjiao/fairy.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1674220790187"
+    
+    },
+    {
+        "name":"Pegasus",
+        "descrption":"Divine winged stallion",
+        "origins": "Greek Mythology",
+        "image": "https://ik.imagekit.io/andjiao/pegasus.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674220737201"
+    
+    },
+    {
+        "name":"Phoenix",
+        "descrption":" A mythical bird with long life",
+        "origins": "Greek Mythology",
+        "image": "https://ik.imagekit.io/andjiao/phoenix.45.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674220757509"
+    
+    },
+    
+    {
+        "name":"Fenrir",
+        "descrption":"Gigantic monstrous wolf",
+        "origins": "Norse Mythology",
+        "image": "https://ik.imagekit.io/andjiao/fenrir.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674220628956"
+    
+    },
+    
+    {
+        "name":"Dragon",
+        "descrption":"Depicted as fire-breathing and winged",
+        "origins": "Global Culture",
+        "image": "https://ik.imagekit.io/andjiao/Sk%C3%A6rmbillede_2023-01-20_kl._14.14.19.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674220592861"
+    
+    },
+
+    {
+        "name":"Ghoul",
+        "descrption":"A monster associated with eating flesh in graveyards ",
+        "origins": "Arabian Mythology",
+        "image": "https://ik.imagekit.io/andjiao/ghoul.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674220566398"
+    
+    }
+
+]

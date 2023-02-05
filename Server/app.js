@@ -1,18 +1,25 @@
 import mongoose from "mongoose";
+
+import * as dotenv from 'dotenv' 
+dotenv.config();
+
 import bodyParser from "body-parser"
-import "dotenv/config"; 
 
 import express from "express";
 const app = express();
 
-import { authRouter } from "./routes/auth.js";
-import { userRouter } from './routes/user.js';
-import {evilStudentRouter} from './routes/evilStudent.js'
-import { goodStudentRouter } from './routes/goodStudent.js';
-import { mentorRouter } from './routes/mentor.js';
-
 import cors from "cors";
 app.use(cors({ credentials: true, origin: true }));
+
+import helmet from "helmet"
+app.use(helmet())
+
+import session from "express-session"
+app.use(session({
+    secret: process.env.SECRET_SESSION,
+    resave: false,
+    saveUninitialized: false, //if something goes wrong changes this to true
+}))
 
 app.use(express.static("public"))
 app.use(bodyParser.json())
@@ -25,12 +32,14 @@ mongoose.connect(url)
 .then(() => console.log('Connected to MongoDB...'))
 .catch(err => console.error('Could not connect to MongoDB...'))
 
+import { userRouter } from './routes/user.js';
+import {evilStudentRouter} from './routes/evilStudent.js'
+import { goodStudentRouter } from './routes/goodStudent.js';
 
-app.use('/api/login', authRouter);
+
 app.use('/api/users', userRouter);
 app.use('/api/goodStudents', goodStudentRouter);
 app.use('/api/evilStudents', evilStudentRouter);
-app.use('/api/mentors', mentorRouter);
 
 
 const PORT = process.env.PORT || 8080;

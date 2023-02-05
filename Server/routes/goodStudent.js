@@ -4,13 +4,10 @@ import _ from 'lodash'
 import express from 'express';
 const router = express.Router();
 
-import auth from '../middleware/auth.js'
-import isGoodUser from '../middleware/isGood.js'
+import {checkingLogin} from "../utill/auth.js"
 import {GoodStudent,validate} from '../models/goodStudent.js'
 
-/*router.use(auth)
-router.use(isGoodUser)*/
-
+//router.use(checkingLogin)
 router.get('/:id', async (req, res) => {
   const goodStudent = await GoodStudent.findById(req.params.id);
 
@@ -46,7 +43,7 @@ router.get('/', async (req, res) => {
       name: req.body.name,
       abilities: req.body.abilities,
       whoToHelp: req.body.whoToHelp,
-    },{new:true});
+    });
 
     if (!goodStudent) return res.status(404).send('The goodStudent with the given ID was not found.');
 
@@ -55,9 +52,11 @@ router.get('/', async (req, res) => {
   )
 
   router.delete('/:id', async (req, res) => {
-    const goodStudent = await GoodStudent.findByIdAndRemove(req.params.id);
+    const goodStudent = await GoodStudent.findByIdAndRemove([req.params.id]);
   
-    if (!goodStudent) return res.status(404).send('The goodStudent with the given ID was not found.');
+    if (!goodStudent) 
+    return res.status(404).send('The goodStudent with the given ID was not found.');
+
   
     res.send(goodStudent);
   });

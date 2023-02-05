@@ -1,8 +1,13 @@
-import jwt from 'jsonwebtoken'
 import Joi from'joi';
 import mongoose from 'mongoose'
 
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 2,
+    maxlength: 255,
+  },
   email: {
     type: String,
     required: true,
@@ -16,25 +21,23 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
-  isEvil:{
+  isAdmin:{
     type: Boolean,
-    required: true
+    default:false,
+    required: false,
   } 
 });
 
-userSchema.methods.generateAuthToken = function() { 
-  const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.jwtPrivateKey);
-  return token;
-}
 
 const User = mongoose.model("User", userSchema);
 
 
 function validateUser(userSchema) {
   const schema = Joi.object({
+    name:Joi.string().min(2).max(255),
     email:Joi.string().min(5).max(255).required().email(),
     password:Joi.string().min(5).max(255).required(),
-    isEvil: Joi.boolean().required()
+    isAdmin:Joi.boolean(),
   });
 
   return schema.validate(userSchema);
