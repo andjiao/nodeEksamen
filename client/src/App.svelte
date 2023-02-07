@@ -1,17 +1,17 @@
 <script>
-  import Signin from "./components/Signin.svelte";
-  import Login from "./components/Login.svelte";
-  import GoodStudents from "./components/GoodStudents.svelte";
-  import GoodForm from "./components/GoodForm.svelte";
-  import GoodUpdate from "./components/GoodUpdate.svelte";
+  import Signin from "./pages/Signin.svelte";
+  import Login from "./pages/Login.svelte";
+  import GoodStudents from "./pages/GoodStudents.svelte";
+  import GoodForm from "./pages/GoodForm.svelte";
+  import GoodUpdate from "./pages/GoodUpdate.svelte";
   
-  import EvilStudents from "./components/EvilStudents.svelte";
+  import EvilStudents from "./pages/EvilStudents.svelte";
   //import EvilForm from "./components/EvilForm.svelte";
   //import EvilUpdate from "./components/EvilUpdate.svelte";
 
-  import Users from "./components/Users.svelte";
+  import Users from "./pages/Users.svelte";
  
-  import NavBar from "./components/NavBar.svelte";
+  import NavBar from "./pages/NavBar.svelte";
   import { Route, Router } from 'svelte-navigator'
  
 
@@ -20,7 +20,12 @@
   <main>
     <Router>
       <NavBar></NavBar>
-        <Route path="/home"> <h1>Home</h1> </Route>
+        <Route path="/">
+          <!-- svelte-ignore a11y-img-redundant-alt -->
+          
+          <div id="frontpage"> </div>
+         
+        </Route>
         <Route path="/login"> <Login /> </Route>
         <Route path="/signin"> <Signin /> </Route>
        
@@ -38,5 +43,21 @@
     </Router>
   
   </main>
+
+  <style>
+    #frontpage{
+   
+      background-image: url("./store/goodAdnEVil.jpg");
+      min-height: 750px;
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+opacity: 55%;
+
+/* Needed to position the navbar */
+position: relative;
+}
+  </style>
 
  

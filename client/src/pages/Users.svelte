@@ -13,7 +13,7 @@ const navigate = useNavigate()
 if($user?.isEvil !== true) {
         const navigate = useNavigate()
 
-        navigate('/home')
+        navigate('/')
     }
 
 let users = []

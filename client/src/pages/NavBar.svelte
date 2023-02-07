@@ -1,5 +1,5 @@
 <script>
-      import { Router, Link, useNavigate } from 'svelte-navigator'
+      import { Link, useNavigate } from 'svelte-navigator'
       import {BASE_URL} from '../store/globals.js'
 
       import { user } from '../store/getUser.js'
@@ -21,7 +21,7 @@
     if(response.ok){
       user.set(null)
      localStorage.removeItem("user")  
-    navigate('/home', {replace:true} )
+    navigate('/', {replace:true} )
           
     } else {
       const json = await response.json()
@@ -36,29 +36,15 @@
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <Link class="navbar-brand" to="/home">
-        SFGE
+    <Link class="navbar-brand" to="/">
+        SGE
     </Link>
 
-    <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon" />
-  </button>
-
+   
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     
     <div class="navbar-nav">
       {#if !$user}
-      <Link class="nav-item nav-link" to="/home">
-        About
-      </Link>
       <Link class="nav-item nav-link" to="/signin">
         Signin
       </Link>
@@ -66,13 +52,12 @@
         Login
       </Link>
      
-      {:else if $user.isEvil === false}
-      
+      {:else if $user.isEvil === false} 
       <Link class="nav-item nav-link" to="/goodStudents">
         Good Students
       </Link> 
       <form class="form-inline">
-        <button class="btn btn-sm btn-outline-secondary" on:click={logout} >Logout</button>
+        <button class="btn btn-outline-secondary" on:click={logout} >Logout</button>
       </form>
       
       {:else if $user.isEvil === true}
@@ -80,7 +65,7 @@
         Evil Students
       </Link> 
       <form class="form-inline">
-        <button class="btn btn-sm btn-outline-secondary" on:click={logout} >Logout</button>
+        <button class="btn btn-outline-secondary" on:click={logout} >Logout</button>
       </form>
 
       {/if}

@@ -38,7 +38,7 @@
             const input = await response.json()
             user.set(input.data)
             localStorage.setItem("user", JSON.stringify($user))
-            navigate('/home', { replace: true })
+            navigate('/', { replace: true })
 
         } catch (error) {
             Toastr.error('Could not login')

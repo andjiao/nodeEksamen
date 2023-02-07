@@ -7,7 +7,7 @@
     const navigate = useNavigate()
     
  if(!$user) {
-        navigate('/home')
+        navigate('/')
     }
 
     let nameInput =""

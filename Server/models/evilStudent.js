@@ -1,7 +1,6 @@
 import Joi from'joi';
 import mongoose from 'mongoose'
 
-/* IF time, add pet */
 
 const evilStudentSchema = new mongoose.Schema({
   name: {

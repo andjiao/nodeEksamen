@@ -10,32 +10,36 @@
 import { Router,Link, useNavigate } from 'svelte-navigator';
 const navigate = useNavigate()
 
-let evilStudents = []
-$:totalEvils = evilStudents.length;
+if(!$user) {
+        navigate('/')
+    }
+
+let goodStudents = []
+$:totalGoods = goodStudents.length;
 
   
-    async function fetchEvilStudents() {
+    async function fetchGoodStudents() {
 
         try {
-          const response = await fetch(`${$BASE_URL}/EvilStudents`)
+          const response = await fetch(`${$BASE_URL}/goodStudents`)
           if(response.ok) {
             const result = await response.json();
             $user.id = result.userid
-            evilStudents = result;
+            goodStudents = result;
             } else {
                 const data = await response.json()
                 Toastr.warning(data.message)
             }
         } catch (error) {
-         Toastr.error('Could not get Students.')
+         Toastr.error('Please login')
           
         }
     }
 
-    async function deleteEvil(id) {
+    async function deleteGood(id) {
 
         try {
-            const response = await fetch(`${$BASE_URL}/evilStudents/${id}`, {
+            const response = await fetch(`${$BASE_URL}/goodStudents/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' }
             })
@@ -45,27 +49,27 @@ $:totalEvils = evilStudents.length;
                 Toastr.warning(json.message)
                 return
             } else{
-              evilStudents = evilStudents.filter(evil => evil.id != id)
+              goodStudents = goodStudents.filter(good => good.id != id)
             }
 
             
         } catch (error){
             Toastr.error('Could not delete student')
 	    }
-      return evilStudents;
+      return goodStudents;
 
     }
    
-  export async function getEvil(evilId) {
+  export async function getGood(goodId) {
     try {
-        const response = await fetch(`${$BASE_URL}/evilStudents/${evilId}`, {
+        const response = await fetch(`${$BASE_URL}/goodStudents/${goodId}`, {
             headers: { 'Content-Type': 'application/json' }
         })
 
         if (response.ok) {
             const result = await response.json()
-            const evilId = result._id
-            navigate(`/evilUpdate/${evilId}`,{replace:true})
+            const goodId = result._id
+            navigate(`/goodUpdate/${goodId}`,{replace:true})
             
            
         } else {
@@ -76,17 +80,23 @@ $:totalEvils = evilStudents.length;
         Toastr.error('Unable to get student')
     }
 }
-    fetchEvilStudents()
 
-    let searchedEvil;
+function handleIcon(){
+  // <i class="mi mi-favorite"> -- star
+  // <i class="mi mi-heart"> -- star
+    // select
 
-    $: searchedEvils = searchedEvil ? search : evilStudents;
+}
+    fetchGoodStudents()
 
-$: search = evilStudents.filter((evil) =>
-    evil.name.toLowerCase().includes(searchedEvil) 
-    || evil.weapon.toLowerCase().includes(searchedEvil) 
-    || evil.yourVictime.toLowerCase().includes(searchedEvil) 
+    let searchedGood;
 
+    $: searchedGoods = searchedGood ? search : goodStudents;
+
+$: search = goodStudents.filter((good) =>
+    good.name.toLowerCase().includes(searchedGood) 
+    || good.abilities.toLowerCase().includes(searchedGood) 
+    || good.whoToHelp.toLowerCase().includes(searchedGood) 
 );
 
 
@@ -97,45 +107,43 @@ $: search = evilStudents.filter((evil) =>
 <br>
 
 <form class="form-inline my-2 my-lg-0">
-  <h3>There are {totalEvils} of Evils in this school</h3>
+  <h3>There are {totalGoods} of Goods in this school</h3>
   <br>
     <Router primary={false}>
-        <Link class ="btn btn-outline-success" to="/evilForm">
-          <i class="mi mi-add"><span class="u-sr-only">Ceate Evil</span></i> 
+        <Link class ="btn btn-outline-success" to="/goodForm">
+          <i class="mi mi-add"><span class="u-sr-only">Ceate Good</span></i> 
         </Link>
     </Router>
   </form>
   <br>
-  <input type="text" placeholder="Search" bind:value={searchedEvil}/>
-  {#if evilStudents.length && searchedEvils.length > 0}
+  <input type="text" placeholder="Search" bind:value={searchedGood}/>
+  {#if goodStudents.length && searchedGoods.length > 0}
   <br>
   <table class="table"> 
     <thead> 
       <tr>
       <th>Name</th>
-        <th>Weapon</th>
-        <th>who the student is tutoring</th>
-        <th>Mood</th>
+        <th>Abilities</th>
+        <th>who the student is helping</th>
       </tr>
     </thead>
     <tbody>
-        {#each evilStudents && searchedEvils as evil} 
+        {#each goodStudents && searchedGoods as good} 
         <tr>
-          <td>{evil.name}</td>
-          <td>{evil.weapon}</td>
-          <td>{evil.yourVictime}</td>
-          <td> <i class="mi mi-favorite"><span class="u-sr-only"></span></i> </td>
-
+          <td>{good.name}</td>
+          <td>{good.abilities}</td>
+          <td>{good.whoToHelp}</td>
+         
           <td>
-            <form action="/evilStudents">
-              <button type="submit" id="deleteEvil" class="btn btn-outline-danger btn-sm" on:click={(_id)=> deleteEvil(evil._id)}>
+            <form action="/goodStudents">
+              <button type="submit" id="deleteGood" class="btn btn-outline-danger btn-sm" on:click={(_id)=> deleteGood(good._id)}>
                 <i class="mi mi-delete"><span class="u-sr-only"></span></i> 
               </button>
             </form> 
           </td>
           <td>
         
-                <button id="updateEvil" class="btn btn-outline-warning btn-sm" on:click={(_id)=> getEvil(evil._id)}>
+                <button id="updateGood" class="btn btn-outline-info btn-sm" on:click={(_id)=> getGood(good._id)}>
                   <i class="mi mi-edit-alt"><span class="u-sr-only"></span></i> 
                   
                 </button>
@@ -147,7 +155,7 @@ $: search = evilStudents.filter((evil) =>
         </tbody>
         </table>
         {:else}
-        <h1 class="text-center text-muted my-3">No students found</h1>
+        <h1 class="text-center text-muted my-3">No Goods found</h1>
         {/if}
               
     </div>

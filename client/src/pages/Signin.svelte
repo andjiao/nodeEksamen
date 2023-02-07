@@ -45,12 +45,11 @@
                 })
             if (!response.ok) {
             const json = await response.json()
-            console.log(json.message)
-            //Toastr.warning(json.message)
+            Toastr.warning(json.message)
             return
         } else{
         const json = await response.json()
-        //Toastr.success(json.message)
+        Toastr.success(json.message)
         navigate('/login', { replace: true })
         
         }
@@ -83,12 +82,17 @@
             required>
             
             <label>
-                
+                check for evilness  
                 <input type="checkbox" bind:checked={isEvilInput}>
             </label>
+
+
         </form>
         <button class="btn btn-primary" type="submit" id="subtmit" on:click={signin}>Signin</button>
     </div>
+
+
+  
 
     
     

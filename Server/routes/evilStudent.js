@@ -1,11 +1,12 @@
 import _ from 'lodash'
-import {checkingLogin} from "../utill/auth.js"
+import {checkingUser,checkingIsEvil} from "../utill/auth.js"
 import express from 'express';
 const router = express.Router();
 
 import {EvilStudent, validate} from '../models/evilStudent.js'
 
-//router.use(checkingLogin)
+router.use(checkingUser)
+//router.use(checkingIsEvil)
 
 router.get('/:id', async (req, res) => {
   const evilStudent = await EvilStudent.findById(req.params.id);

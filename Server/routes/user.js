@@ -34,21 +34,15 @@ router.post('/login', async (req, res) => {
     if (!user || !validatePassword) {
       return res.status(400).send({message: 'Invalid email or password.'})
     }else{
-      req.session.isLoggedIn === true
-      req.session.userid = user._id
-      
-      if (user.admin === true) {
-        res.status(200).send({ data: {id: user.id, email: user.email, isEvil: !!user.isEvil } })
-        return
-            }
-          res.status(200).send({ data: {id: user.id, email: user.email, isEvil: !!user.isEvil}})
+      req.session.isEvil === user.isEvil
+      res.status(200).send({ data: {id: user.id, email: user.email, isEvil: user.isEvil } })
+      return
+            
         }
     } catch (error) {
-      console.log(error)
-    
+     
       res.status(500).send({ message: "Server error." })
     }
-
 
   });
 
